@@ -1,5 +1,7 @@
 package Sorting;
 
+import com.sun.source.tree.WhileLoopTree;
+
 import java.util.Arrays;
 
 public class SortAgorithm {
@@ -7,9 +9,9 @@ public class SortAgorithm {
         int[] list = {100, 1, 43, 54, 23, 15, 45};
 //        selectionSort(list);
 //        bubbleSort(list);
-        insertionSort(list);
-//        selectionSort2(list);
-        System.out.println(Arrays.toString(list));
+//        insertionSort(list);
+          insertionSort2(list);
+//        System.out.println(Arrays.toString(list));
     }
 
 
@@ -65,24 +67,61 @@ public class SortAgorithm {
         }
     }
 
-    //insertion sort
+    //insertion sort tu phai sang trai
     public static void insertionSort(int[] list) {
-        for(int i = 0; i < list.length - 1; i++) {
+        int n = list.length - 1;
+        int i, j, x;
 
-            for(int j = i + 1; j > 0; j--){
-                int temp = list[j];
-                int pos = j;
+        for(i = n - 1; i >= 0; i--) {
+            x = list[i];
+            j = i + 1;
+            while(j <= n && x > list[j]) {
+                list[j - 1] = list[j];
+                j++;
+            }
+            list[j - 1] = x;
+        }
+    }
 
-                if(list[j] < list[j - 1]){
-                    pos = j - 1;
+    //insertion sort tu trai sang phai
+    public static void insertionSort2(int[] list) {
+
+        int i, j;
+        i = 0;
+        int pos = i;
+
+        int x = list[i];
+        for(j = i + 1; j >= 0; j--) {
+            if(x > list[j]) {
+                list[j] = list[j + 1];
+                pos++;
+            }
+            list[pos] = x;
+        }
+
+        System.out.println(Arrays.toString(list));
+
+    }
+
+    //fdsaf
+    static void Check2(int[] array){
+        for (int i = array.length - 2; i >= 0 ; i--) {
+            int value = array[i];
+            int hole = i;
+            for (int j = i; j < array.length - 1; j++) {
+                if (array[j + 1] < value) {
+                    array[j] = array[j + 1];
+                    hole++;
                 }
-
-                for(int k = j; k >= pos; k--){
-                    list[j--] = list[k];
+                else {
+                    break;
                 }
             }
-
+            if (hole != i) {
+                array[hole] = value;
+            }
         }
-        //note khong co chuyen doi cho
+        System.out.print("\n 2 \n");
+        System.out.println(Arrays.toString(array));
     }
 }

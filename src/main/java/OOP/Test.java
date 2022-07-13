@@ -1,6 +1,7 @@
 package OOP;
 
 public class Test {
-    int id;
-    String name;
+    private int id =1;
+    public String name = "henry";
+    protected int id2 = 2;
 }
