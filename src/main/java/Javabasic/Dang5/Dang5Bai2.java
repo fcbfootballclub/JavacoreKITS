@@ -2,15 +2,16 @@ package Javabasic.Dang5;
 
 import java.util.Arrays;
 
-public class Dang5 {
+public class Dang5Bai2 {
     public static void main(String[] args) {
-        int[] A = {5, 3, 7, 8, 4, 6, 8, 3};
+        int[] A = {5, 95, 9, 5, 1, 9, 10,16, 4,6, 8, 3,5, 1, 9, 5, 1, 9, 10,16, 4,6, 8, 3, 101};
         timChuoiTangDangLonNhat(A);
     }
 
     public static void timChuoiTangDangLonNhat(int[] list) {
         int count = 1;
         int maxLen = 1;
+        int sum = list[0];
 
         //luu lại max len của chuỗi tăng dần lớn nhất vào array vị trí
         int[] viTri = new int[list.length];
@@ -19,10 +20,12 @@ public class Dang5 {
         for (int i = 1; i < list.length; i++) {
             if(list[i] >= list[i -1]){
                 count++;
+                sum += list[i];
             } else {
                 count = 1;
+                sum = list[i];
             }
-            if(count >= maxLen){
+            if(count >= maxLen && sum >= 100){
                 maxLen = count;
                 viTri[i] = maxLen;
             }
@@ -52,5 +55,4 @@ public class Dang5 {
             }
         }
     }
-
 }

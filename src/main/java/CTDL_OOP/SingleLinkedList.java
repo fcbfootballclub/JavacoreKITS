@@ -114,7 +114,7 @@ public class SingleLinkedList {
         return -1;
     }
 
-    public int deleteAfter2(){
+    public int deleteRear2(){
         int data = -1;
         if(!isEmpty()){
             if(head.next == null){
@@ -122,7 +122,18 @@ public class SingleLinkedList {
                 head = null;
             } else {
                 Element current = this.head;
+                Element nextCurrent = current.next;
+                while(nextCurrent.next != null) {
+                    current = current.next;
+                    nextCurrent = current.next;
+                }
+                data = nextCurrent.data;
+                current.next = null;
+                return data;
             }
+        }
+        else {
+            System.out.println("Empty list!");
         }
         return data;
     }
@@ -183,13 +194,18 @@ public class SingleLinkedList {
         System.out.println(singleLinkedList.deleteRear());
         System.out.println(singleLinkedList.len());
         singleLinkedList.display();
+        System.out.println("Test rear");
+        System.out.println(singleLinkedList.deleteRear2());
+        singleLinkedList.display();
+        System.out.println(singleLinkedList.deleteRear2());
+        singleLinkedList.display();
 
 
         System.out.println(singleLinkedList.Ktra());
 
-        if(singleLinkedList.Ktra()){
-            singleLinkedList.display();
-        }
+//        if(singleLinkedList.Ktra()){
+//            singleLinkedList.display();
+//        }
 
 
     }
