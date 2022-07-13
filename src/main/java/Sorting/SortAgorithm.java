@@ -68,13 +68,20 @@ public class SortAgorithm {
     //insertion sort
     public static void insertionSort(int[] list) {
         for(int i = 0; i < list.length - 1; i++) {
+
             for(int j = i + 1; j > 0; j--){
                 int temp = list[j];
-                while(list[j] < list[j -1]){
-                    list[j] = list[j - 1];
-                    list[j - 1] = temp;
+                int pos = j;
+
+                if(list[j] < list[j - 1]){
+                    pos = j - 1;
+                }
+
+                for(int k = j; k >= pos; k--){
+                    list[j--] = list[k];
                 }
             }
+
         }
         //note khong co chuyen doi cho
     }
