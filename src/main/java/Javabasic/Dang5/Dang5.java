@@ -14,6 +14,7 @@ public class Dang5 {
 
         //luu lại max len của chuỗi tăng dần lớn nhất vào array vị trí
         int[] viTri = new int[list.length];
+//        int pos = -1;
 
         //lưu lại maxLenIndex vào một chuỗi
         for (int i = 1; i < list.length; i++) {
@@ -25,6 +26,7 @@ public class Dang5 {
             if(count >= maxLen){
                 maxLen = count;
                 viTri[i] = maxLen;
+//                viTri[++pos] = i;
             }
         }
 
