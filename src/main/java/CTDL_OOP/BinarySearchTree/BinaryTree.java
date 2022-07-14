@@ -35,10 +35,27 @@ public class BinaryTree {
         }
     }
 
+    //Nut trái cùng của bên phải
+    public Node nodeTraiCung(Node root){
+        if(root != null) {
+            if(root.left == null) {
+                return root;
+            } else {
+                return nodeTraiCung(root.left);
+            }
+        }
+        return null;
+    }
+
+
 
     //xoa mot Tree node
     public void deleteData(int a){
         if(root == null) return;
+        if(root.left == null && root.right == null){
+            root = null;
+        }
+
         Node findNode = root;
         Node parentNode = null;
         boolean found = false;
@@ -64,8 +81,22 @@ public class BinaryTree {
                 }
             }
 
-            if(findNode.left != null && findNode.right != null){
-
+            if(findNode.right != null && findNode.left == null){
+                parentNode.right = findNode.right;
+            }
+            if(findNode.left != null && findNode.right == null){
+                parentNode.left = findNode.left;
+            }
+            else {
+                try{
+                    Node minNode = nodeTraiCung(findNode.right); //khi gọi câu lệnh xóa node thì lệnh này bị lỗi
+                    System.out.println();
+//                System.out.println("min node data la: " + minNode.data);
+                    deleteData(minNode.data);
+                    findNode.data = minNode.data;
+                } catch (Exception e){
+                    System.out.println("Da xoa min node");
+                }
             }
         }
         else {
@@ -93,11 +124,16 @@ public class BinaryTree {
         binaryTree.insert(12);
         binaryTree.insert(1);
         binaryTree.insert(4);
+        binaryTree.insert(0);
+        binaryTree.insert(2);
         binaryTree.printTree(binaryTree.root);
-        binaryTree.deleteData(4);
+//        binaryTree.deleteData(10);
+        binaryTree.deleteData(3);
         System.out.println();
         binaryTree.printTree(binaryTree.root);
-        binaryTree.deleteData(15);
+        binaryTree.deleteData(1);
+        binaryTree.printTree(binaryTree.root);
+
 
     }
 }
