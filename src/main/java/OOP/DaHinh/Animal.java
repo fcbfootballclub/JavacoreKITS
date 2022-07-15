@@ -1,4 +1,4 @@
-package DaHinh;
+package OOP.DaHinh;
 
 public class Animal {
     public void eat(){
