@@ -7,7 +7,7 @@ public class IOdemo {
         Person person = new Person(1, "henry");
         ObjectOutputStream objectOutputStream = null;
         ObjectInputStream objectInputStream = null;
-        File file = new File("C:\\Users\\MULTICAMPUSPC\\Desktop\\KITS java core\\Buoi1\\src\\main\\java\\IOJava\\Demo\\file.txt");
+        File file = new File("file.txt");
 
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(file);
@@ -36,7 +36,9 @@ public class IOdemo {
             throw new RuntimeException(e);
         } finally {
             try {
-                objectInputStream.close();
+                if (objectInputStream != null) {
+                    objectInputStream.close();
+                }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

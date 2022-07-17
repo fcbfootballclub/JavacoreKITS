@@ -80,6 +80,8 @@ public class DoubleLinkedList {
         demo.insertHead(10);
         demo.insertHead(20);
         demo.insertHead(30);
+        demo.insertRear(40);
+        demo.insertRear(50);
         demo.display();
         demo.displayFromRear();
         System.out.println(demo.length());

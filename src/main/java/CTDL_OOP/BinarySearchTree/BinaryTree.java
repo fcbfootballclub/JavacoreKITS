@@ -163,25 +163,22 @@ public class BinaryTree {
                 } else {
                     parentNode.right = null;
                 }
-                return;
             }
-
-            if (findNode.right != null && findNode.left == null) {
+            else if (findNode.right != null && findNode.left == null) {
                 if (parentNode.right == findNode) {
                     parentNode.right = findNode.right;
                 } else {
                     parentNode.left = findNode.right;
                 }
-                return;
             }
-            if (findNode.right == null) {
+            else if (findNode.right == null) {
                 if (parentNode.left == findNode) {
                     parentNode.left = findNode.left;
                 } else {
                     parentNode.right = findNode.left;
                 }
             } else {
-                Node minNode = nodeTraiCung(findNode.right); //khi gọi câu lệnh xóa node thì lệnh này bị lỗi
+                Node minNode = nodeTraiCung(findNode.right);
                 System.out.println();
                 System.out.println("min node data la: " + minNode.data);
                 deleteData(minNode.data);
@@ -215,13 +212,13 @@ public class BinaryTree {
         binaryTree.insert(32);
         binaryTree.insert(37);
         binaryTree.printTree(binaryTree.root);
-//        binaryTree.deleteData(10);
         binaryTree.deleteData(10);
         binaryTree.deleteData(30);
         System.out.println();
-//        binaryTree.deleteData(20);
         System.out.println();
         binaryTree.printTree(binaryTree.root);
+        System.out.println();
+        System.out.println(binaryTree.root.data);
 
     }
 }
