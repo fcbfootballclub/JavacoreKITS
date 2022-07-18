@@ -101,6 +101,7 @@ public class BinaryTree {
                     parent.left = node.left;
                 }
             }
+
         } else {
             //bai tap ve nha
             Node traicung = nodeTraiCung(node);
@@ -108,9 +109,15 @@ public class BinaryTree {
             node.data = traicung.data;
 
             if (parent == null) {
-                node.right = traicung.right;
-            } else {
-                parent.left = traicung.right;
+//                node.right = traicung.right;
+//            } else {
+//                parent.left = traicung.right;
+                if(node.left == null) {
+                    node.right = traicung.right;
+                }
+            }
+            else {
+                
             }
         }
         return true;
