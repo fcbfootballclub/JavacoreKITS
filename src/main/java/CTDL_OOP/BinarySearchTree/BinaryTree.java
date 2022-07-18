@@ -48,12 +48,10 @@ public class BinaryTree {
         return null;
     }
 
-
     //Xóa không đệ quy (xóa giá trị x)
     //1. Tìm nút chứa x
     //1.1 nút chứa x là nút lá: Đặt tham chiếu từ node cha của x = null
     //1.2 nút chứa x chỉ có một con khác null: Đặt tham chiếu từ node cha của x đến node con của x
-    //Nút chứa x có ít nhất một node con null;
     Node findNode(int x) {
         Node node = root;
         while (node != null && node.data != x) {
@@ -79,6 +77,7 @@ public class BinaryTree {
         }
 
         if (node == null) return false;
+        //xóa node có ít nhất 1 con
         if (node.left == null || node.right == null) { //case 1 va 2
             if (parent == null) {
                 if (root.right == null) {
@@ -102,23 +101,26 @@ public class BinaryTree {
                 }
             }
 
+            //xóa node có 2 con
         } else {
             //bai tap ve nha
-            Node traicung = nodeTraiCung(node);
+            Node traicung = node.right;
             Node parentTraiCung = null;
-            node.data = traicung.data;
+            while(traicung.left != null){
+                parentTraiCung = traicung;
+                traicung = traicung.left;
+            }
 
-            if (parent == null) {
-//                node.right = traicung.right;
-//            } else {
-//                parent.left = traicung.right;
-                if(node.left == null) {
-                    node.right = traicung.right;
-                }
+            node.data = traicung.data;
+            if (parentTraiCung == null) {
+                node.right = traicung.right;
             }
-            else {
-                
+            else  {
+                parentTraiCung.left = traicung.right;
             }
+            System.out.println();
+            System.out.println("node trai cung: " + traicung.data);
+//            System.out.println("Parent node trai cung: " + parentTraiCung.data);
         }
         return true;
     }
@@ -208,24 +210,24 @@ public class BinaryTree {
         printTree(node.right);
     }
 
-    public static void main(String[] args) {
-        BinaryTree binaryTree = new BinaryTree();
-        binaryTree.insert(10);
-        binaryTree.insert(20);
-        binaryTree.insert(15);
-        binaryTree.insert(40);
-        binaryTree.insert(30);
-        binaryTree.insert(35);
-        binaryTree.insert(32);
-        binaryTree.insert(37);
-        binaryTree.printTree(binaryTree.root);
-        binaryTree.deleteData(10);
-        binaryTree.deleteData(30);
-        System.out.println();
-        System.out.println();
-        binaryTree.printTree(binaryTree.root);
-        System.out.println();
-        System.out.println(binaryTree.root.data);
+//    public static void main(String[] args) {
+//        BinaryTree binaryTree = new BinaryTree();
+//        binaryTree.insert(15);
+//        binaryTree.insert(20);
+//        binaryTree.insert(10);
+//        binaryTree.insert(40);
+//        binaryTree.insert(30);
+//        binaryTree.insert(35);
+//        binaryTree.insert(32);
+//        binaryTree.insert(37);
+//        binaryTree.printTree(binaryTree.root);
+//        binaryTree.deleteData(10);
+//        binaryTree.deleteData(30);
+//        System.out.println();
+//        System.out.println();
+//        binaryTree.printTree(binaryTree.root);
+//        System.out.println();
+//        System.out.println(binaryTree.root.data);
 
-    }
+//    }
 }
