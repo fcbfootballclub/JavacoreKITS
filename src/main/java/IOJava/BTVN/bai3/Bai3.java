@@ -74,9 +74,9 @@ public class Bai3 {
                     } else {
                         break;
                     }
-                    if(pos != i){
-                        list[pos] = temp;
-                    }
+                }
+                if(pos != i){
+                    list[pos] = temp;
                 }
             }
             for(int i = 0; i < count; i++){
@@ -88,12 +88,12 @@ public class Bai3 {
 
     public static void main(String[] args) {
         //file de doc du lieu
-        File file = new File("C:\\Users\\Big Man\\Desktop\\KITS\\Core\\JavacoreKITS\\src\\main\\java\\IOJava\\BTVN\\bai3\\Student.txt");
+        File file = new File("src/main/java/IOJava/BTVN/bai3/Student.txt");
         Bai3 bai3 = new Bai3();
         bai3.readStudentFromFile(file);
 
         //file de ghi du lieu
-        File writeFile = new File("C:\\Users\\Big Man\\Desktop\\KITS\\Core\\JavacoreKITS\\src\\main\\java\\IOJava\\BTVN\\bai3\\WriteFile");
+        File writeFile = new File("src/main/java/IOJava/BTVN/bai3/WriteFile");
         bai3.writeObjectStudent(writeFile);
 
         //doc du lieu tu file

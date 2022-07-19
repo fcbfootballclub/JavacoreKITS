@@ -2,3 +2,12 @@
     equals
     hashcode
     toString
+
+    //so sánh object
+    contain list. so sánh hàm equal
+    set. compare to
+    hashSet. Add thêm một phần thử contain @Override equal, hashcode
+    hashMap. Khi put một giá trị khóa trùng thì value cũ bị ghi đề
+    hashcode()=>
+    =>> Hash function dùng để xác định địa chỉ
+

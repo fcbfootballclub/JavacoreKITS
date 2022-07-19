@@ -151,11 +151,11 @@ public class Bai2 {
         Bai2 bai2 = new Bai2();
 
         //đọc file int và in ra một dãy đã sắp xếp
-        File file = new File("C:\\Users\\Big Man\\Desktop\\KITS\\Core\\JavacoreKITS\\src\\main\\java\\IOJava\\BTVN\\bai2\\Data.txt");
+        File file = new File("src/main/java/IOJava/BTVN/bai2/Data.txt");
         bai2.readFile(file);
 
         //write List đó ra một file khác bằng data out put stream
-        File fileWrite = new File("C:\\Users\\Big Man\\Desktop\\KITS\\Core\\JavacoreKITS\\src\\main\\java\\IOJava\\BTVN\\bai2\\Numbers.dat");
+        File fileWrite = new File("src/main/java/IOJava/BTVN/bai2/Numbers.dat");
         bai2.writeFile(fileWrite);
 
         //Đọc file vừa ghi bằng data input stream

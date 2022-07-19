@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Dang5bai3 {
     public static void main(String[] args) {
-        int[] A={1,0,2, 4, 6, 8, 14, 3, 4, 6, 8, 14, 16, 18};
+        int[] A={0,1, 2, 3,4,8,10};
         dayConTangDanSoChan(A);
     }
 
@@ -29,9 +29,10 @@ public class Dang5bai3 {
                 if(list[i] < list[i+1] && list[i + 1] % 2 == 0) {
                     len++;
                     last_index = i + 1;
-                } else {
-                    len = 0;
                 }
+//                else {
+//                    len = 0;
+//                }
 
             } else {
                 len = 0;
