@@ -1,12 +1,13 @@
 package BTVNStreamAPI.Bai3;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Queue;
 
 public class App {
-    static BuyQueue buyQueue = new BuyQueue();
-    static SellQueue sellQueue = new SellQueue();
+    static HashMap<Stock, BuyQueue> buyQueueHashMap = new HashMap<>();
+    static HashMap<Stock, SellQueue> sellQueueHashMap = new HashMap<>();
 
     static int sumGiaoDich = 0;
     static int countGiaoDich  = 0;
@@ -29,40 +30,53 @@ public class App {
         Stock BIDV = new Stock("BIDV", "BIDV");
         List<Stock> stockList = new ArrayList<>();
 
-        //Tạo yêu cầu bán cổ phiếu
+        //Tạo yêu cầu bán chứng khoán
         SellRequest sellRequest1 = new SellRequest(1, trader1, VCB,100);
         SellRequest sellRequest2 = new SellRequest(2, trader3, VCB,90);
-        SellRequest sellRequest3 = new SellRequest(3, trader2, VIN,110);
+        SellRequest sellRequest3 = new SellRequest(3, trader2, VCB,110);
         SellRequest sellRequest4 = new SellRequest(4, trader4, VCB,80);
-        sellQueue.sellRequestQueue.add(sellRequest1);
-        sellQueue.sellRequestQueue.add(sellRequest2);
-        sellQueue.sellRequestQueue.add(sellRequest3);
-        sellQueue.sellRequestQueue.add(sellRequest4);
-        sellQueue.sellRequestQueue.forEach(System.out::println);
+        SellQueue sellQueueVCB = new SellQueue(); //tạo object chứa queue lưu lại sell request của VCB
+        sellQueueVCB.sellRequestQueue.add(sellRequest1);
+        sellQueueVCB.sellRequestQueue.add(sellRequest2);
+        sellQueueVCB.sellRequestQueue.add(sellRequest3);
+        sellQueueVCB.sellRequestQueue.add(sellRequest4);
+        sellQueueHashMap.put(VCB, sellQueueVCB); //put stock và queue sell vào map
         System.out.println("---------");
 
-
-        //Tạo yêu cầu buy request
+        //Tạo yêu cầu mau chứng khoán
         BuyRequest buyRequest1 = new BuyRequest(1, trader4, VCB, 100);
-        BuyRequest buyRequest2 = new BuyRequest(2, trader4, VCB, 80);
-        buyQueue.buyRequestQueue.add(buyRequest1);
-        buyQueue.buyRequestQueue.add(buyRequest2);
-        buyQueue.getAllBuyRequestByStockID(new Stock("VCB", "Vietcombank"));
-        buyQueue.list.forEach(System.out::println);
-        System.out.println("--------");
+        BuyRequest buyRequest2 = new BuyRequest(2, trader5, VCB, 80);
+        BuyRequest buyRequest3 = new BuyRequest(3, trader1, VCB, 70);
+        BuyQueue buyQueueVCB = new BuyQueue();
+        buyQueueVCB.buyRequestQueue.add(buyRequest1);
+        buyQueueVCB.buyRequestQueue.add(buyRequest2);
+        buyQueueVCB.buyRequestQueue.add(buyRequest3);
+        buyQueueHashMap.put(VCB, buyQueueVCB);
 
-        System.out.println("Peek: " + buyQueue.list.peek());
-        buyQueue.list.poll();
-        System.out.println("--------");
-
-
-
+        khopLenh();
 
     }
 
-    static void khopLenh(Queue<BuyQueue> list1, Queue<SellQueue> list2){
-        for(BuyQueue x : list1){
-            if(list1.)
+    static void khopLenh(){
+        for(Stock x : buyQueueHashMap.keySet()){
+            System.out.println(x + ". Value: " + buyQueueHashMap.get(x));
         }
+
+        //Lấy ra Stock VCB trong Map các Stock đang listing để khớp giao dịch
+        BuyQueue buy = buyQueueHashMap.get(new Stock("VCB", "a"));
+        SellQueue sell = sellQueueHashMap.get(new Stock("VCB", "a"));
+
+        System.out.println("buy id");
+        System.out.println(buy.buyRequestQueue);
+        System.out.println("sell id");
+        System.out.println(sell.sellRequestQueue);
+        while(buy.buyRequestQueue.peek().getBuyPrice() > sell.sellRequestQueue.peek().getSellPrice()){
+            buy.buyRequestQueue.poll();
+            SellRequest sellRequest = sell.sellRequestQueue.poll();
+            countGiaoDich++;
+            sumGiaoDich += sellRequest.sellPrice;
+        }
+        System.out.println("Count giao dich: " + countGiaoDich);
+        System.out.println("Sum giao dich: " + sumGiaoDich);
     }
 }

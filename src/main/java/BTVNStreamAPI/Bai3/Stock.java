@@ -43,4 +43,9 @@ public class Stock {
     public boolean equals(Object obj) {
         return ((Stock) obj).getMaStock().equals(this.maStock);
     }
+
+    @Override
+    public int hashCode() {
+        return this.maStock.hashCode();
+    }
 }
