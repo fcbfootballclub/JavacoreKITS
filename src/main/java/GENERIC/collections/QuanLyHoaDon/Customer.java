@@ -1,6 +1,6 @@
 package GENERIC.collections.QuanLyHoaDon;
 
-public class Customer {
+public class Customer implements Comparable<Customer>{
     private String id;
     private String name;
     private String address;
@@ -56,5 +56,15 @@ public class Customer {
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Customer o) {
+        return this.getName().compareTo(o.getName());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return ((Customer) obj).getId().equals(this.id);
     }
 }

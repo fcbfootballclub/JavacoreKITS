@@ -38,4 +38,9 @@ public class Stock {
                 ", nameStock='" + nameStock + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return ((Stock) obj).getMaStock().equals(this.maStock);
+    }
 }

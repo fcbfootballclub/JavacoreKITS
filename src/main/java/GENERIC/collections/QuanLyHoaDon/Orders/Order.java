@@ -57,4 +57,14 @@ public class Order implements Comparable<Order>{
     public int compareTo(Order o) {
         return this.IdOrder - o.IdOrder;
     }
+
+    @Override
+    public int hashCode() {
+        return this.IdOrder;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return ((Order) obj).getIdOrder() == this.getIdOrder();
+    }
 }

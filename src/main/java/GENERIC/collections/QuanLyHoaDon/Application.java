@@ -65,8 +65,9 @@ public class Application {
             System.out.println(x.toString() + ". Value: " + OrderList.get(x));
         }
 
-        //Tim kiem hoa don theo ma hoa don
-        int searchIDOrder = 1;
+        //Tim kiem hoa don theo ma hoa don bằng 1
+        Order searchOrder = new Order(); searchOrder.setIdOrder(1);
+        System.out.println("Tìm kiếm order có id = 1: " + OrderList.containsKey(searchOrder));
         for(Order x : OrderList.keySet()){
             int sumMoney = 0;
             int sumItem = 0;
@@ -126,5 +127,100 @@ public class Application {
         for(Integer x : maxTotalValueOrderID.keySet()){
             System.out.println("Order ID: " + x + ". Quantity: " + maxTotalValueOrderID.get(x));
         }
+
+        //Bài 1.2:    --------------------------------------------------------------------------
+        //Tạo ít nhất là 02 khách hàng
+        TreeMap <Customer, ArrayList<Order>> customers_order_List = new TreeMap<>();
+
+        ArrayList<Order> listCS01 = new ArrayList<>(); //tạo array list chứa thông tin order của từng khách hàng
+        listCS01.add(order1);
+        ArrayList<Order> listCS02 = new ArrayList<>(); //tạo array list chứa thông tin order của từng khách hàng
+        listCS02.add(order2);
+        listCS02.add(order3);
+
+        customers_order_List.put(customer1, listCS01); //add khách hàng vào orders List của họ vào list
+        customers_order_List.put(customer2, listCS02);
+
+        //- Thực hành tìm kiếm danh sách hoá đơn theo mã khách hàng
+        Customer searchCustomer = new Customer();
+        searchCustomer.setId("CS02");
+        System.out.println("Tìm kiếm danh sách hóa đơn theo mã khách hàng: ");
+        for(Customer x : customers_order_List.keySet()){
+            if(x.equals(searchCustomer)) {
+                customers_order_List.get(x).stream().toList().forEach(System.out::println);
+                break;
+            }
+        }
+
+        //- Xác định khách hàng có nhiều hóa đơn nhất và in ra màn hình: Khách hàng và Số lượng hóa đơn tương ứng.
+        HashMap<Customer, Integer> KhachHang_soLuongHoaDon = new HashMap<>();
+        int count_order = 0;
+        int max_order = 0;
+        for(Customer x : customers_order_List.keySet()){
+            count_order = customers_order_List.get(x).size();
+            if(count_order == max_order) {
+                KhachHang_soLuongHoaDon.put(x, max_order);
+            } else if(count_order > max_order) {
+                KhachHang_soLuongHoaDon.clear();
+                max_order = count_order;
+                KhachHang_soLuongHoaDon.put(x, max_order);
+            }
+        }
+        for(Customer x : KhachHang_soLuongHoaDon.keySet()){
+            System.out.println(x + ". Mua số lượng hóa đơn nhiều nhất là: " + KhachHang_soLuongHoaDon.get(x));
+        }
+
+
+        //Bài2 : Hãy xây dựng và chèn đơn nhập hàng vào các cấu trúc dữ liệu sau:---------------------------------------
+        //- Tạo ít nhất 02 khách hàng, mỗi khách hàng ít nhất 02 Order, mỗi Order ít nhất là 02 OrderDetail
+        HashMap <Customer, TreeMap <Order, ArrayList<OrderDetail>> > customerAndOrderDetailList = new HashMap<>();
+
+        TreeMap <Order, ArrayList<OrderDetail>> order_orderDetail_CS01 = new TreeMap<>();
+        order_orderDetail_CS01.put(order1, (ArrayList<OrderDetail>) orderDetailList1);
+
+        TreeMap <Order, ArrayList<OrderDetail>> order_orderDetail_CS02 = new TreeMap<>();
+        order_orderDetail_CS02.put(order2, (ArrayList<OrderDetail>) orderDetailList2);
+        order_orderDetail_CS02.put(order3, (ArrayList<OrderDetail>) orderDetailList3);
+
+        //put value <order and detail order> to map
+        customerAndOrderDetailList.put(customer1, order_orderDetail_CS01);
+        customerAndOrderDetailList.put(customer2, order_orderDetail_CS02);
+
+        //Tìm kiếm hóa đơn theo mã khách hàng
+        System.out.println("Tìm kiếm khách hàng có mã là CS02 và in ra hóa đơn của người này: ");
+        Customer customerSearch2 = new Customer();
+        customerSearch2.setId("CS02");
+        for(Customer x : customerAndOrderDetailList.keySet()){
+            if(x.equals(customerSearch2)){
+                for(Order y : customerAndOrderDetailList.get(x).keySet()){
+                    System.out.println("Hóa đơn: " + y);
+                }
+            }
+        }
+
+        //Xác định khách hàng có tổng tiền mua hàng lớn nhất
+        totalValue = 0; //tổng số tiền mua của mỗi khách hàng
+        maxTotalOrderValue = 0; //tổng số tiền nhiều nhất mà một khách hàng mua (cộng tất cả các order của khách hàng)
+        HashMap<Customer, Integer> bestCustomers = new HashMap<>();
+        for(Customer x : customerAndOrderDetailList.keySet()){
+            totalValue = 0;
+            for(Order y : customerAndOrderDetailList.get(x).keySet()){
+                for(OrderDetail z : customerAndOrderDetailList.get(x).get(y)){
+                    totalValue += z.getPrice() * z.getAmount();
+                }
+            }
+            if(totalValue == maxTotalOrderValue){
+                bestCustomers.put(x, maxTotalOrderValue);
+            } else if(totalValue > maxTotalOrderValue){
+                bestCustomers.clear();
+                maxTotalOrderValue = totalValue;
+                bestCustomers.put(x, maxTotalOrderValue);
+            }
+        }
+        System.out.println("Những khách hàng có tổng tiền doanh thu lớn nhất là: ");
+        for(Customer x : bestCustomers.keySet()){
+            System.out.println("Customer: " + x + ". Max value: " + maxTotalOrderValue);
+        }
+
     }
 }
