@@ -66,8 +66,11 @@ public class App {
         System.out.println(maxAmount);
 
         System.out.println("2.6.2. In ra giao dịch có số lượng lớn nhất");
-        List<Transaction> demo = transactionList.stream().filter(s -> s.getAmount() == maxAmount).toList();
+        List<Transaction> demo = transactionList.stream().filter(s -> s.getAmount() == maxAmount).toList(); //đi 2 lượt
         demo.forEach(System.out::println);
+        //Cách tìm max đi một lượt
+
+
 
         System.out.println("2.7. Tính và in ra tổng số lượng trong các giao dịch của các khách hàng ở một địa chỉ nào đó");
         int count = transactionList.stream().filter(s -> s.getTrader().getAddress().equals("Hanoi")).mapToInt(Transaction::getAmount).sum();

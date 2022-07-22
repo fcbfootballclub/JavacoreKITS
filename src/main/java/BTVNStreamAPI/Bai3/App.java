@@ -5,14 +5,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Queue;
 
-public class App {
+public class App implements Runnable{
     static HashMap<Stock, BuyQueue> buyQueueHashMap = new HashMap<>();
     static HashMap<Stock, SellQueue> sellQueueHashMap = new HashMap<>();
+
+    List<Thread> xuLyGiaoDich = new ArrayList<>(10);
+
 
     static int sumGiaoDich = 0;
     static int countGiaoDich  = 0;
 
     public static void main(String[] args) {
+        App app1 = new App();
+        Thread thread1 = new Thread(app1);
+        thread1.start();
+
         //tạo users
         Trader trader1 = new Trader(1, "Henry1");
         Trader trader2 = new Trader(2, "AHenry1");
@@ -78,5 +85,10 @@ public class App {
         }
         System.out.println("Count giao dich: " + countGiaoDich);
         System.out.println("Sum giao dich: " + sumGiaoDich);
+    }
+
+    @Override
+    public void run() {
+        khopLenh();
     }
 }
