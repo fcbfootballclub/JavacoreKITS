@@ -133,12 +133,12 @@ public class Main2 {
             Float price = (float) Math.random() * 1000;
             if (x < 0.5) {
                 Order ord1 = new Order(1, 1, lstStock.get(iIDStock), lstTrader.get(iIDTrader),iAmount, price);
-                insertOrder(1, lstStock.get(iIDStock),lstTrader.get(iIDTrader), iAmount, price);
+//                insertOrder(1, lstStock.get(iIDStock),lstTrader.get(iIDTrader), iAmount, price);
                 PriorityQueue<Order> bQ = hm_st_Buyq.get(lstStock.get(iIDStock));
                 bQ.add(ord1);
             } else {
                 Order ord2 = new Order(2,2, lstStock.get(iIDStock),lstTrader.get(iIDTrader),iAmount, price);
-                insertOrder(2, lstStock.get(iIDStock),lstTrader.get(iIDTrader), iAmount, price);
+//                insertOrder(2, lstStock.get(iIDStock),lstTrader.get(iIDTrader), iAmount, price);
                 PriorityQueue<Order> sellQ = hm_st_Sellq.get(lstStock.get(iIDStock));
                 sellQ.add(ord2);
             }
@@ -147,7 +147,10 @@ public class Main2 {
             PriorityQueue<Order> bQ = hm_st_Buyq.get(lstStock.get(iIDStock));
             //Bổ sung vào đây
 //            System.out.println("Khớp lệnh"+ lstStock[iIDStock]);
-            //Tạo list chứa tất cả các transantion.
+            //Tạo list chứa tất cả các transantion.\
+            DAO dao = new DAO();
+            float a = dao.getAllTransactionsValue();
+            System.out.println("ToTal revenue: " + a);
 
             while(!sQ.isEmpty() && !bQ.isEmpty()) {
 //            System.out.println("buy size: " + bQ_FPT.size());
@@ -177,7 +180,7 @@ public class Main2 {
                     }
                     transantionList.add(transantion);
                     transantion.date = new Date();
-                    insertTransaction(transantion.idStock, transantion.idBuyer, transantion.idSeller,transantion.amount, transantion.price, formatter.format(transantion.date));
+//                    insertTransaction(transantion.idStock, transantion.idBuyer, transantion.idSeller,transantion.amount, transantion.price, formatter.format(transantion.date));
                     transantionList.forEach(System.out::println);
                 } else {
                     break;
